@@ -1,17 +1,18 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function AddUser() {
+const AddUser = () => {
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
     username: "",
     email: "",
+    email1: new Date().toLocaleString(), // Initialize with current time
   });
 
-  const { name, username, email } = user;
+  const { name, username, email, email1 } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -27,17 +28,17 @@ export default function AddUser() {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Add a new Course</h2>
+          <h2 className="text-center m-4">Add your attendance details</h2>
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="Name" className="form-label">
-                Course Name
+                Student Name
               </label>
               <input
-                type={"text"}
+                type="text"
                 className="form-control"
-                placeholder="Enter the course you wanna/did complete "
+                placeholder="Enter your name"
                 name="name"
                 value={name}
                 onChange={(e) => onInputChange(e)}
@@ -45,12 +46,12 @@ export default function AddUser() {
             </div>
             <div className="mb-3">
               <label htmlFor="Username" className="form-label">
-                Domain
+                Roll No
               </label>
               <input
-                type={"text"}
+                type="text"
                 className="form-control"
-                placeholder="[e.g.] web dev, AIML, DBMS..."
+                placeholder="Enter your roll no"
                 name="username"
                 value={username}
                 onChange={(e) => onInputChange(e)}
@@ -58,15 +59,27 @@ export default function AddUser() {
             </div>
             <div className="mb-3">
               <label htmlFor="Email" className="form-label">
-                Deadline
+                Course
               </label>
               <input
-                type={"text"}
+                type="text"
                 className="form-control"
-                placeholder="set a goal date, so that you'll follow it💯💯"
+                placeholder="Course Name"
                 name="email"
                 value={email}
                 onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            {/* Display current time */}
+            <div className="mb-3">
+              <label htmlFor="Time" className="form-label">
+                Time
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                value={email1}
+                readOnly
               />
             </div>
             <button type="submit" className="btn btn-outline-success">
@@ -80,4 +93,6 @@ export default function AddUser() {
       </div>
     </div>
   );
-}
+};
+
+export default AddUser;
